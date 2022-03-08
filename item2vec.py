@@ -8,11 +8,13 @@ class Item2Vec(nn.Module):
         self.shared_embedding = nn.Embedding(args['vocabulary_size'], args['embedding_dim'])
         self.lr = args['learning_rate']
         self.epochs = args['epochs']
+        self.out_act = nn.Sigmoid()
 
     def forward(self, target_i, context_j):
         target_emb = self.shared_embedding(target_i) # batch_size * embedding_size
         context_emb = self.shared_embedding(context_j) # batch_size * embedding_size
         output = torch.sum(target_emb * context_emb, dim=1)
+        output = self.out_act(output)
 
         return output.view(-1)
 
