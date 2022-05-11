@@ -7,7 +7,7 @@ from torch.utils.data import Dataset, DataLoader
 from item2vec import Item2Vec
 
 def choose_with_prob(p_discard):
-    p = random.uniform()
+    p = np.random.uniform()
     return False if p < p_discard else True
 
 def sgns_sample_generator(train_seqs, vocabulary_size, context_window, discard=False):
